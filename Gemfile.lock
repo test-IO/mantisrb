@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    mantisrb (0.0.1)
-      builder (~> 2.1.2)
+    mantisrb (0.1.0)
+      builder (>= 2.1.2)
       bundler
       log4r
       nokogiri
