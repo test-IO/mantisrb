@@ -208,6 +208,7 @@ module Mantis
         :name => name,
         :file_type => file_type,
         :content => data,
+        :attributes! => { :content => { "xsi:type" => "SOAP-ENC:base64" } },
         :order! => [:issue_id, :name, :file_type, :content]
       }
     end
