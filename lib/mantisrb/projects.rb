@@ -39,7 +39,7 @@ module Mantis
       issues = @session.response_trimmed(:mc_project_get_issues, {
         :project_id => id,
         :page_number => page,
-        :per_page => per_page
+        :per_page => per_page,
         :order! => [:project_id, :page_number, :per_page]
       })
       if issues.class == Hash
