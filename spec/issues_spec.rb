@@ -12,7 +12,7 @@ describe Mantis::Issues do
     @projects = []
     @issues_list = []
     @project_id = session.projects.create params={
-      name: random_alphanumeric }
+      :name => random_alphanumeric }
     @projects << @project_id
     @project = session.projects.find_by_id(@project_id)
   end
@@ -20,10 +20,10 @@ describe Mantis::Issues do
   describe "creating issues" do
     it "should create a simple issue given a project" do
       id = session.issues.add params={
-        project: 45,
-        summary: "Some Summary Description",
-        description: "More Detailed Response will go here",
-        category: "General" # Assuming it's part of all projects
+        :project => 45,
+        :summary => "Some Summary Description",
+        :description => "More Detailed Response will go here",
+        :category => "General" # Assuming it's part of all projects
       }
       wont_be_nil id
       @issues_list << id
@@ -39,10 +39,10 @@ describe Mantis::Issues do
   describe "deleting issues" do
     it "should delete an issue with an id" do
       id = session.issues.add params={
-        project: 45, # test has been defined by it for now, should refactor it out
-        summary: random_alphanumeric,
-        description: random_alphanumeric(256),
-        category: "General"
+        :project => 45, # test has been defined by it for now, should refactor it out
+        :summary => random_alphanumeric,
+        :description => random_alphanumeric(256),
+        :category => "General"
       }
       session.issues.delete?(id).must_equal true
     end

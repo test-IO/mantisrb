@@ -1,3 +1,10 @@
+unless Kernel.respond_to?(:require_relative)
+  module Kernel
+    def require_relative(path)
+      require File.join(File.dirname(caller[0]), path.to_str)
+    end
+  end
+end
 require_relative 'spec_helper'
 
 class ConfigTests < MiniTest::Unit::TestCase
@@ -83,18 +90,18 @@ class ConfigTests < MiniTest::Unit::TestCase
       end # statuses
 
       describe "meta-method mapping" do
-        meth_to_val = { status: :acknowledged,
-                        priority: :none,
-                        severity: :feature,
-                        reproducibility: :always,
-                        projection: :none,
-                        eta: :none,
-                        resolution: :open,
-                        access_level: :viewer,
-                        project_status: :development,
-                        project_view_state: :public,
-                        view_state: :public,
-                        custom_field_type: :Numeric
+        meth_to_val = { :status => :acknowledged,
+                        :priority => :none,
+                        :severity => :feature,
+                        :reproducibility => :always,
+                        :projection => :none,
+                        :eta => :none,
+                        :resolution => :open,
+                        :access_level => :viewer,
+                        :project_status => :development,
+                        :project_view_state => :public,
+                        :view_state => :public,
+                        :custom_field_type => :Numeric
         }
         meth_to_val.each { |k,v| 
           it "should find a list of ObjectRef Type for #{k}" do

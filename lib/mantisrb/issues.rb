@@ -27,14 +27,14 @@ module Mantis
     # @return [Hash] {Mantis::XSD::IssueData} as a raw Hash object. (see
     # #by_id) for a more accessible object
     def raw_by_id(id)
-      @session.response_trimmed :mc_issue_get, { :issue_id => id }
+      @session.response_trimmed :mc_issue_get, { :issue_id => id, :order! => [:issue_id] }
     end
 
     # Does an Issue exist with the given ID?
     # @param [Integer] id ID to search for
     # @return [Boolean] whether there is an issue with the id or not.
     def exists?(id)
-      @session.response_trimmed :mc_issue_exists, { :issue_id => id }
+      @session.response_trimmed :mc_issue_exists, { :issue_id => id, :order! => [:issue_id] }
     end
 
     # Search an issue by summary field (Must be explicit).  Use this if you

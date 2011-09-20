@@ -46,7 +46,7 @@ describe "Working With Projects" do
   describe "Categories" do
     #before do
       #@cat_prj_id = session.projects.create params={
-        #name: random_alphanumeric
+        #:name => random_alphanumeric
       #}
       #@cat_prj = session.projects.find_by_id @cat_prj_id
       #@category_hash = {} # Hash of project_id to array of categories to clean up afterwards
@@ -90,7 +90,7 @@ describe "Working With Projects" do
     end
     it "should create a project with only a name" do
       new_project_id = session.projects.create params={
-        name: random_alphanumeric 
+        :name => random_alphanumeric 
       }
       new_project_id.wont_be_nil
       @projects << new_project_id
@@ -98,31 +98,31 @@ describe "Working With Projects" do
     it "shouldn't accept incorrect project status types" do
       assert_raises RuntimeError do
         session.projects.create params={
-          name: random_alphanumeric,
-          status: "something that doesn't exist",
+          :name => random_alphanumeric,
+          :status => "something that doesn't exist",
         }
       end
     end
     it "shouldn't accept incorrect view_states" do
       assert_raises RuntimeError do
         session.projects.create params={
-          name: random_alphanumeric,
-          view_state: "something non-existent"
+          :name => random_alphanumeric,
+          :view_state => "something non-existent"
         }
       end
     end
     it "shouldn't accept incorrect access minimum level" do
       assert_raises RuntimeError do
         session.projects.create params={
-          name: random_alphanumeric,
-          access_min: "I know this doesn't exist"
+          :name => random_alphanumeric,
+          :access_min => "I know this doesn't exist"
         }
       end
     end
     it "shouldn't accept incorrect subprojects" do
       assert_raises RuntimeError do
         session.projects.create params={
-          subprojects: "blah blah blah bad"
+          :subprojects => "blah blah blah bad"
         }
       end
     end
@@ -143,7 +143,7 @@ describe "Working With Projects" do
   describe "Deletion" do
     before do
       @id = session.projects.create params={
-        name: random_alphanumeric }
+        :name => random_alphanumeric }
       @projects << @id
     end
     it "should delete a project with a valid project_id" do
@@ -163,7 +163,7 @@ describe "Working With Projects" do
   describe "listing" do
     before do
       @id = session.projects.create params={
-        name: random_alphanumeric }
+        :name => random_alphanumeric }
       @projects << @id
     end
     it "should return an array of hashes" do
