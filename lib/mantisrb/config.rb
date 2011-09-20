@@ -5,19 +5,19 @@ module Mantis
 
     # Maps an {Mantis::XSD::ObjectRef} instance to a name.
     VALUE_TO_METHOD = { 
-      reproducibility: :reproducibilities,
-      status: :statuses,
-      priority: :priorities,
-      severity: :severities,
-      projection: :projections,
-      eta: :etas,
-      resolution: :resolutions,
-      access_level: :access_levels,
-      access_min: :access_levels,
-      project_status: :project_statuses,
-      project_view_state: :project_view_states,
-      view_state: :view_states,
-      custom_field_type: :custom_field_types
+      :reproducibility => :reproducibilities,
+      :status => :statuses,
+      :priority => :priorities,
+      :severity => :severities,
+      :projection => :projections,
+      :eta => :etas,
+      :resolution => :resolutions,
+      :access_level => :access_levels,
+      :access_min => :access_levels,
+      :project_status => :project_statuses,
+      :project_view_state => :project_view_states,
+      :view_state => :view_states,
+      :custom_field_type => :custom_field_types
     }
 
     # Create an instance of {Config}
