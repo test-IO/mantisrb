@@ -54,7 +54,8 @@ module Mantis
     # matching that summmary, otherwise nil.
     def raw_by_summary(issue_summary)
       @session.response_trimmed :mc_issue_get_id_from_summary, {
-        :summary => issue_summary
+        :summary => issue_summary,
+        :order! => [:summary]
       }
     end
 
@@ -63,7 +64,8 @@ module Mantis
     # @return [Integer] biggest integer ID for that project
     def biggest_id_in_project(project_id)
       @session.response_trimmed :mc_issue_get_biggest_id, {
-        :project_id => project_id
+        :project_id => project_id,
+        :order! => [:project_id]
       }
     end
 
@@ -110,7 +112,8 @@ module Mantis
     # @return [Boolean] true|false success or failure
     def delete?(issue_id)
       @session.response_trimmed :mc_issue_delete, {
-        :issue_id => issue_id
+        :issue_id => issue_id,
+        :order! => [:issue_id]
       }
     end
 
@@ -125,7 +128,8 @@ module Mantis
       @session.response_trimmed :mc_issue_checkin, {
         :issue_id => issue_id,
         :comment => comment,
-        :fixed => fixed
+        :fixed => fixed,
+        :order! => [:issue_id, :comment, :fixed]
       }
     end
 
@@ -137,7 +141,8 @@ module Mantis
       note_data = Mantis::XSD::IssueNoteData.new(note_data) if note_data.class == Hash
       @session.response_trimmmed :mc_issue_note_add, {
         :issue_id => issue_id,
-        :note => note.to_s
+        :note => note.to_s,
+        :order! => [:issue_note_id, :note]
       }
     end
 
@@ -146,7 +151,8 @@ module Mantis
     # @return [Boolean] sucesss/failure of the operation
     def delete_note(issue_note_id)
       @session.response_trimmed :mc_issue_note_delete, {
-        :issue_note_id => issue_note_id
+        :issue_note_id => issue_note_id,
+        :order! => [:issue_note_id]
       }
     end
 
@@ -159,7 +165,8 @@ module Mantis
     def update_note(note)
       note = Mantis::XSD::IssueNoteData.new(note) if note.class == Hash
       @session.response_trimmed :mc_issue_note_update, {
-        :note => note
+        :note => note,
+        :order! => [:note]
       }
     end
 
@@ -171,7 +178,8 @@ module Mantis
     def add_relationship(issue_id, relationship)
       @session.response_trimmed :mc_issue_relationship_add, {
         :issue_id => issue_id,
-        :relationship => relationship.to_s
+        :relationship => relationship.to_s,
+        :order! => [:issue_id, :issue_attachment_id]
       }
     end
 
@@ -182,7 +190,8 @@ module Mantis
     def delete_relationship(issue_id, relationship_id)
       @session.response_trimmed :mc_issue_relationship_delete, {
         :issue_id => issue_id,
-        :relationship_id => relationship_id
+        :relationship_id => relationship_id,
+        :order! => [:issue_id, :relationship_id]
       }
     end
 
@@ -198,7 +207,8 @@ module Mantis
         :issue_id => issue_id,
         :name => name,
         :file_type => file_type,
-        :content => data
+        :content => data,
+        :order! => [:issue_id, :name, :file_type, :content]
       }
     end
 
@@ -207,7 +217,8 @@ module Mantis
     # @return [Boolean] success or failure
     def delete_attachment(attachment_id)
       @session.response_trimmed :mc_issue_attachment_delete, {
-        :issue_attachment_id => attachment_id
+        :issue_attachment_id => attachment_id,
+        :order! => [:issue_attachment_id]
       }
     end
 
@@ -216,7 +227,8 @@ module Mantis
     # @return [Base64] Base64 encoded data representation of the file
     def get_attachment(attachment_id)
       @session.response_trimmed :mc_issue_attachment_get, {
-        :issue_attachment_id => attachment_id
+        :issue_attachment_id => attachment_id,
+        :order! => [:issue_attachment_id]
       }
     end
 
