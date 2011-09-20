@@ -17,7 +17,7 @@ module Mantis
     # @return [Array<Mantis::XSD::FilterData>] List of filters
     def by_project(project_id)
       filters = [] << @session.response_trimmed(:mc_filter_get, {
-        project_id: project_id
+        :project_id => project_id
       })
       filters.map { |f| Mantis::XSD::FilterData.new f }
     end
@@ -36,10 +36,10 @@ module Mantis
     # @return [Hash] Raw XML return of Issues
     def raw_issues_for(project_id, filter_id, page_num=0, per_page=50)
       @session.response_trimmed :mc_filter_get_issues, {
-        project_id: project_id,
-        filter_id: filter_id,
-        page_number: page_num,
-        per_page: per_page
+        :project_id => project_id,
+        :filter_id => filter_id,
+        :page_number => page_num,
+        :per_page => per_page
       }
     end
 

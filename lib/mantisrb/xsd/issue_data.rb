@@ -24,36 +24,36 @@ module Mantis::XSD
     # @return [Nokogiri::XML::Node]
     def to_doc(tag_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:IssueData") do
+        xml.send(tag_name, :type => "tns:IssueData") do
           xml.id_ @id if @id
           if (@view_state)
-            xml.view_state(type: "tns:ObjectRef") {
+            xml.view_state(:type => "tns:ObjectRef") {
               xml.id_ @view_state[:id]
               xml.name @view_state[:name]
             }
           end
           xml.last_updated @last_updated if @last_updated
           if @project
-            xml.project(type: "tns:ObjectRef") {
+            xml.project(:type => "tns:ObjectRef") {
               xml.id_ @project[:id]
               xml.name @project[:name]
             }
           end
           xml.category @category if @category
           if @priority
-            xml.priority(type: "tns:ObjectRef") {
+            xml.priority(:type => "tns:ObjectRef") {
               xml.id_ @priority[:id]
               xml.name @priority[:name]
             }
           end
           if @severity
-            xml.severity(type: "tns:ObjectRef") {
+            xml.severity(:type => "tns:ObjectRef") {
               xml.id_ @severity[:id]
               xml.name @priority[:name]
             }
           end
           if @status
-            xml.status(type: "tns:ObjectRef") {
+            xml.status(:type => "tns:ObjectRef") {
               xml.id_ @status[:id]
               xml.name @status[:name]
             }
@@ -66,7 +66,7 @@ module Mantis::XSD
           xml.os @os if @os
           xml.os_build @os_build if @os_build
           if @reproducibility
-            xml.reproducibility(type: "tns:ObjectRef") {
+            xml.reproducibility(:type => "tns:ObjectRef") {
               xml.id_ @reproducibility[:id]
               xml.name @reproducibility[:name]
             }
@@ -75,19 +75,19 @@ module Mantis::XSD
           xml.sponsorship_total @sponsorship_total if @sponsorship_total
           # TODO: handler (AccountData)
           if @projection
-            xml.projection(type: "tns:ObjectRef") {
+            xml.projection(:type => "tns:ObjectRef") {
               xml.id_ @projection[:id]
               xml.name @projection[:name]
             }
           end
           if @eta
-            xml.eta(type: "tns:ObjectRef") {
+            xml.eta(:type => "tns:ObjectRef") {
               xml.id_ @eta[:id]
               xml.name @eta[:name]
             }
           end
           if @resolution
-            xml.resolution(type: "tns:ObjectRef") {
+            xml.resolution(:type => "tns:ObjectRef") {
               xml.id_ @resolution[:id]
               xml.name @resolution[:name]
             }

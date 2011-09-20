@@ -12,12 +12,12 @@ module Mantis::XSD
     # @param [String] tag_name name to wrap the XML node in
     def to_doc(tag_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:IssueNoteData") do
+        xml.send(tag_name, :type => "tns:IssueNoteData") do
           xml.id_ @id if @id
           # TODO: reporter (AccountData)
           xml.text @text if @text
           if (@view_state)
-            xml.view_state(type: "tns:ObjectRef") {
+            xml.view_state(:type => "tns:ObjectRef") {
               xml.id_ @view_state[:id]
               xml.name @view_state[:name]
             }

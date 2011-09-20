@@ -7,7 +7,7 @@ module Mantis::XSD
     attr_accessor :id, :filename, :size, :content_type, :date_submitted, :download_url, :user_id
     def to_doc(tag_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:AttachmentData") do
+        xml.send(tag_name, :type => "tns:AttachmentData") do
           xml.id_ @id if @id
           xml.filename @filename if @filename
           xml.size @size if @size

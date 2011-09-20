@@ -15,7 +15,7 @@ module Mantis::XSD
     # @return [Nokogiri::XML::Document]
     def to_doc(tag_filename)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_filename, type: "tns:ProjectAttachmentData") do
+        xml.send(tag_filename, :type => "tns:ProjectAttachmentData") do
           xml.id_ @id unless @id == nil
           xml.filename @name unless @name == nil
           xml.title @project_id unless @project_id == nil

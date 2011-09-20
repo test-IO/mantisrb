@@ -26,7 +26,7 @@ module Mantis::XSD
     # @return [Nokogiri::XML::Document]
     def to_doc(element_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(element_name, type: "tns:ObjectRef") do 
+        xml.send(element_name, :type => "tns:ObjectRef") do 
           xml.id_ @id
           xml.name @name
         end

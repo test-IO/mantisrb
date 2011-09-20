@@ -57,7 +57,7 @@ module Mantis::XSD::DocBuilder
   # @return Nokogiri Document 
   def to_doc(tag_name, type, &block)
     builder = Nokogiri::XML::Builder.new { |xml|
-      xml.send(tag_name, type: type) do
+      xml.send(tag_name, :type => type) do
         yield
       end
     }

@@ -14,34 +14,34 @@ module Mantis::XSD
     def to_doc(tag_name)
       # TODO: surround conditional
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:IssueHeaderData") do
+        xml.send(tag_name, :type => "tns:IssueHeaderData") do
           xml.id_ @id if @id
-          xml.view_state(type: "tns:ObjectRef") {
+          xml.view_state(:type => "tns:ObjectRef") {
             xml.id_ @view_state[:id]
             xml.name @view_state[:name]
           }
           xml.last_updated @last_updated if @last_updated
-          xml.project(type: "tns:ObjectRef") {
+          xml.project(:type => "tns:ObjectRef") {
             xml.id_ @project[:id]
             xml.name @project[:name]
           }
           xml.category @category if @category
-          xml.priority(type: "tns:ObjectRef") {
+          xml.priority(:type => "tns:ObjectRef") {
             xml.id_ @priority[:id]
             xml.name @priority[:name]
           }
-          xml.severity(type: "tns:ObjectRef") {
+          xml.severity(:type => "tns:ObjectRef") {
             xml.id_ @severity[:id]
             xml.name @priority[:name]
           }
-          xml.status(type: "tns:ObjectRef") {
+          xml.status(:type => "tns:ObjectRef") {
             xml.id_ @status[:id]
             xml.name @status[:name]
           }
           # TODO: reporter (AccountData)
           xml.summary @summary if @build
           # TODO: handler (AccountData)
-          xml.resolution(type: "tns:ObjectRef") {
+          xml.resolution(:type => "tns:ObjectRef") {
             xml.id_ @resolution[:id]
             xml.name @resolution[:name]
           }

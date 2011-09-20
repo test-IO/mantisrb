@@ -11,7 +11,7 @@ module Mantis::XSD
 
     def to_doc(tag_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:AccountData") do
+        xml.send(tag_name, :type => "tns:AccountData") do
           xml.id_ @id if @id
           xml.name @name if @name
           xml.real_name @real_name if @real_name

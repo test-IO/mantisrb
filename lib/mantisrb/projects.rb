@@ -37,9 +37,9 @@ module Mantis
     # @return [Array<Mantis::XSD::IssueData>]
     def issues_by_project_id(id, page=0, per_page=100)
       issues = @session.response_trimmed(:mc_project_get_issues, {
-        project_id: id,
-        page_number: page,
-        per_page: per_page
+        :project_id => id,
+        :page_number => page,
+        :per_page => per_page
       })
       if issues.class == Hash
         return [] << Mantis::XSD::IssueData.new(issues)
@@ -54,9 +54,9 @@ module Mantis
     # @return [Array<Mantis::XSD::IssueData>]
     def issue_headers_by_project_id(id, page=0, per_page=100)
       issues = [] << @session.response_trimmed(:mc_project_get_issue_headers, {
-        project_id: id,
-        page_number: page,
-        per_page: per_page
+        :project_id => id,
+        :page_number => page,
+        :per_page => per_page
       })
       issues.map { |issue| Mantis::XSD::IssueHeaderData.new issue }
     end
@@ -131,7 +131,7 @@ module Mantis
     # @return [Boolean] whether deletion was successful
     def delete?(id_num)
       @session.response_trimmed :mc_project_delete, {
-        project_id: id_num
+        :project_id => id_num
       }
     end
 
@@ -139,7 +139,7 @@ module Mantis
     # @param [Integer] project_id
     def categories(project_id)
       @session.response_trimmed :mc_project_get_categories, {
-        project_id: project_id
+        :project_id => project_id
       }
     end
 
@@ -149,8 +149,8 @@ module Mantis
     # @return [Integer] Category ID
     def add_category(project_id, name)
       @session.response_trimmed :mc_project_add_category, {
-        project_id: project_id,
-        p_category_name: name
+        :project_id => project_id,
+        :p_category_name => name
       }
     end
 
@@ -160,8 +160,8 @@ module Mantis
     # @return [Boolean] success or failure of deletion
     def delete_category(project_id, name)
       @session.response_trimmed :mc_project_delete_category, {
-        project_id: project_id,
-        p_category_name: name
+        :project_id => project_id,
+        :p_category_name => name
       }
     end
 
@@ -174,10 +174,10 @@ module Mantis
     def rename_category(project_id, category_name_old, category_name_new, assigned_to)
       hash = rename_category_hash(params)
       @session.response_trimmed :mc_project_rename_category_by_name, {
-        project_id: project_id,
-        p_category_name: category_name_old,
-        p_category_name_new: category_name_new,
-        p_assigned_to: assigned_to
+        :project_id => project_id,
+        :p_category_name => category_name_old,
+        :p_category_name_new => category_name_new,
+        :p_assigned_to => assigned_to
       }
     end
 
@@ -186,7 +186,7 @@ module Mantis
     # @return [Hash] Hash of custom field types
     def custom_fields_for(id_num)
       @session.response_trimmed :mc_project_get_custom_fields, {
-        projec_id: id_num
+        :projec_id => id_num
       }
     end
 
@@ -197,7 +197,7 @@ module Mantis
     # {Mantis::XSD::ProjectVersionData} objects for each version
     def get_versions(project_id)
       @session.response_trimmed :mc_project_get_versions, {
-        project_id: project_id
+        :project_id => project_id
       }
     end
 
@@ -207,8 +207,8 @@ module Mantis
     # @param [Mantis::XSD::ProjectVersionData] project version data instance
     def update_version(version_id, data)
       @session.response_trimmed :mc_project_version_update, {
-        version_id: version_id,
-        version: data.to_s
+        :version_id => version_id,
+        :version => data.to_s
       }
     end
 
@@ -218,7 +218,7 @@ module Mantis
     # @return [Boolean] true or false for success
     def delete_version(version_id)
       @session.response_trimmed :mc_project_version_delete, {
-        version_id: version_id
+        :version_id => version_id
       }
     end
 
@@ -229,7 +229,7 @@ module Mantis
     # {Mantis::XSD::ProjectVersionData}
     def get_released_versions(project_id)
       versions_ary = @session.response_trimmed :mc_project_get_released_versions, {
-        project_id: project_id
+        :project_id => project_id
       }
       versions_ary.map { |version| Mantis::XSD::ProjectVersionData.new version }
     end
@@ -240,7 +240,7 @@ module Mantis
     # ProjectVersionData
     def get_unreleased_versions(project_id)
       versions_ary = @session.response_trimmed :mc_project_get_unreleased_versions, {
-        project_id: project_id
+        :project_id => project_id
       }
       versions_ary.map { |version| Mantis::XSD::ProjectVersionData.new version }
     end
@@ -251,7 +251,7 @@ module Mantis
     # attachment data
     def get_attachments(project_id)
       attachments = @session.response_trimmed :mc_project_get_attachments, {
-        project_id: project_id
+        :project_id => project_id
       }
       attachments.map { |attachment| Mantis::XSD::ProjectAttachmentData.new attachment }
     end
@@ -262,7 +262,7 @@ module Mantis
     # @return [Base64] Base64 encoded data of the file
     def get_attachment(project_attachment_id)
       @session.response_trimmed :mc_project_attachment_get, {
-        project_attachment_id: project_attachment_id
+        :project_attachment_id => project_attachment_id
       }
     end
 
@@ -276,12 +276,12 @@ module Mantis
     # @return [Integer] id of the attachment for reference later
     def add_attachment(project_id, name, title, description, file_type, content)
       @session.response_trimmed :mc_project_attachment_add, {
-        project_id: project_id,
-        name: name,
-        title: title,
-        description: description,
-        file_type: file_type,
-        content: content
+        :project_id => project_id,
+        :name => name,
+        :title => title,
+        :description => description,
+        :file_type => file_type,
+        :content => content
       }
     end
 
@@ -290,7 +290,7 @@ module Mantis
     # @return [Boolean] successful deletion or failure
     def delete_attachment(project_attachment_id)
       @session.response_trimmed :mc_project_attachment_delete, {
-        project_attachment_id: project_attachment_id
+        :project_attachment_id => project_attachment_id
       }
     end
 
@@ -299,7 +299,7 @@ module Mantis
     # @return [Array<String>] list of projects
     def get_all_subprojects(project_id)
       @session.response_trimmed :mc_project_get_all_subprojects, {
-        project_id: project_id
+        :project_id => project_id
       }
     end
 
@@ -309,8 +309,8 @@ module Mantis
     # @return [String]
     def get_user_preference(project_id, pref_name)
       @session.response_trimmed :mc_user_pref_get_pref, {
-        project_id: project_id,
-        pref_name: pref_name
+        :project_id => project_id,
+        :pref_name => pref_name
       }
     end
 
@@ -344,7 +344,7 @@ module Mantis
           params[p.to_sym] = stat
         end
       }
-      # TODO: Map subprojects
+      # :TODO => Map subprojects
       params
     end
 
@@ -368,9 +368,9 @@ module Mantis
         ERR
       end
       hash = {
-        project_id: params[:project_id],
-        p_category_name: params[:old_category],
-        p_category_name_new: params[:new_category],
+        :project_id => params[:project_id],
+        :p_category_name => params[:old_category],
+        :p_category_name_new => params[:new_category],
       }
       hash[:p_assigned_to] = params[:project_assigned_to] if params[:project_assigned_to]
       hash

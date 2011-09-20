@@ -29,7 +29,7 @@ module Mantis::XSD
     # @param [String] tag_name Name of the tag to wrap this node in.
     def to_doc(tag_name)
       builder = Nokogiri::XML::Builder.new { |xml|
-        xml.send(tag_name, type: "tns:FilterData") do
+        xml.send(tag_name, :type => "tns:FilterData") do
           xml.id_ @id if @id
           # TODO: Owner (tns:AccountData)
           xml.project_id @project_id if @project_id

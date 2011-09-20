@@ -101,7 +101,7 @@ module Mantis
     # conveniences
     def enum_get(type)
       @session.response_trimmed :mc_enum_get, {
-        enumeration: type
+        :enumeration => type
       }
     end
 

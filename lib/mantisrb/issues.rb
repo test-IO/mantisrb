@@ -27,14 +27,14 @@ module Mantis
     # @return [Hash] {Mantis::XSD::IssueData} as a raw Hash object. (see
     # #by_id) for a more accessible object
     def raw_by_id(id)
-      @session.response_trimmed :mc_issue_get, { issue_id: id }
+      @session.response_trimmed :mc_issue_get, { :issue_id => id }
     end
 
     # Does an Issue exist with the given ID?
     # @param [Integer] id ID to search for
     # @return [Boolean] whether there is an issue with the id or not.
     def exists?(id)
-      @session.response_trimmed :mc_issue_exists, { issue_id: id }
+      @session.response_trimmed :mc_issue_exists, { :issue_id => id }
     end
 
     # Search an issue by summary field (Must be explicit).  Use this if you
@@ -54,7 +54,7 @@ module Mantis
     # matching that summmary, otherwise nil.
     def raw_by_summary(issue_summary)
       @session.response_trimmed :mc_issue_get_id_from_summary, {
-        summary: issue_summary
+        :summary => issue_summary
       }
     end
 
@@ -63,7 +63,7 @@ module Mantis
     # @return [Integer] biggest integer ID for that project
     def biggest_id_in_project(project_id)
       @session.response_trimmed :mc_issue_get_biggest_id, {
-        project_id: project_id
+        :project_id => project_id
       }
     end
 
@@ -110,7 +110,7 @@ module Mantis
     # @return [Boolean] true|false success or failure
     def delete?(issue_id)
       @session.response_trimmed :mc_issue_delete, {
-        issue_id: issue_id
+        :issue_id => issue_id
       }
     end
 
@@ -123,9 +123,9 @@ module Mantis
     # @return [Boolean] success or failure (true|false)
     def checkin(issue_id, comment, fixed=false)
       @session.response_trimmed :mc_issue_checkin, {
-        issue_id: issue_id,
-        comment: comment,
-        fixed: fixed
+        :issue_id => issue_id,
+        :comment => comment,
+        :fixed => fixed
       }
     end
 
@@ -136,8 +136,8 @@ module Mantis
     def add_note(issue_id, note_data)
       note_data = Mantis::XSD::IssueNoteData.new(note_data) if note_data.class == Hash
       @session.response_trimmmed :mc_issue_note_add, {
-        issue_id: issue_id,
-        note: note.to_s
+        :issue_id => issue_id,
+        :note => note.to_s
       }
     end
 
@@ -146,7 +146,7 @@ module Mantis
     # @return [Boolean] sucesss/failure of the operation
     def delete_note(issue_note_id)
       @session.response_trimmed :mc_issue_note_delete, {
-        issue_note_id: issue_note_id
+        :issue_note_id => issue_note_id
       }
     end
 
@@ -159,7 +159,7 @@ module Mantis
     def update_note(note)
       note = Mantis::XSD::IssueNoteData.new(note) if note.class == Hash
       @session.response_trimmed :mc_issue_note_update, {
-        note: note
+        :note => note
       }
     end
 
@@ -170,8 +170,8 @@ module Mantis
     # @return [Integer] id of the relationship
     def add_relationship(issue_id, relationship)
       @session.response_trimmed :mc_issue_relationship_add, {
-        issue_id: issue_id,
-        relationship: relationship.to_s
+        :issue_id => issue_id,
+        :relationship => relationship.to_s
       }
     end
 
@@ -181,8 +181,8 @@ module Mantis
     # @return [Boolean] succes or failure
     def delete_relationship(issue_id, relationship_id)
       @session.response_trimmed :mc_issue_relationship_delete, {
-        issue_id: issue_id,
-        relationship_id: relationship_id
+        :issue_id => issue_id,
+        :relationship_id => relationship_id
       }
     end
 
@@ -195,10 +195,10 @@ module Mantis
     # @return [Integer] attachment id to reference
     def add_attachment(issue_id, name, file_type, data)
       @session.response_trimmed :mc_issue_attachment_add, {
-        issue_id: issue_id,
-        name: name,
-        file_type: file_type,
-        content: data
+        :issue_id => issue_id,
+        :name => name,
+        :file_type => file_type,
+        :content => data
       }
     end
 
@@ -207,7 +207,7 @@ module Mantis
     # @return [Boolean] success or failure
     def delete_attachment(attachment_id)
       @session.response_trimmed :mc_issue_attachment_delete, {
-        issue_attachment_id: attachment_id
+        :issue_attachment_id => attachment_id
       }
     end
 
@@ -216,7 +216,7 @@ module Mantis
     # @return [Base64] Base64 encoded data representation of the file
     def get_attachment(attachment_id)
       @session.response_trimmed :mc_issue_attachment_get, {
-        issue_attachment_id: attachment_id
+        :issue_attachment_id => attachment_id
       }
     end
 
