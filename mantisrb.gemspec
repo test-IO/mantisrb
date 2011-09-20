@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "nokogiri"
   s.add_runtime_dependency "bundler"
-  s.add_runtime_dependency "builder", "=> 2.1.2"
+  s.add_runtime_dependency "builder", ">= 2.1.2"
   s.add_runtime_dependency "savon"
   s.add_runtime_dependency "nokogiri"
   s.add_runtime_dependency "log4r"
