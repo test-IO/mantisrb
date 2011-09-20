@@ -40,6 +40,7 @@ module Mantis
         :project_id => id,
         :page_number => page,
         :per_page => per_page
+        :order! => [:project_id, :page_number, :per_page]
       })
       if issues.class == Hash
         return [] << Mantis::XSD::IssueData.new(issues)

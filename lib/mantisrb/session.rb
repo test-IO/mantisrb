@@ -152,6 +152,7 @@ module Mantis
       hash.each_pair { |k,v|
         p[k] = v
       }
+      p[:order!] = [:username, :password] + (p[:order!]||[])
       p
     end
 

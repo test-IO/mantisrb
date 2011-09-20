@@ -32,7 +32,8 @@ module Mantis::XSD::DocBuilder
         instance_variable_set("@#{p}", TYPE_MAPPING[p["@xsi:type"]].send(:new, params[p]))
       else
         #puts "Just A regular type, we'll just go with the flow"
-        instance_variable_set("@#{p}", params[p])
+        pi = p.to_s.match(/:/) ? p.to_s.split(':').last : p
+        instance_variable_set("@#{pi}", params[p])
       end
     }
   end
