@@ -25,13 +25,14 @@ module Mantis
     # SOAP endpoint)
     # @param [String] user
     # @param [String] pass
-    def initialize(url, user, pass)
+    def initialize(url, user, pass, http_user=nil, http_pass=nil)
       @url = url
       @user = user
       @pass = pass
       @connection = Savon::Client.new do
         wsdl.document = sanitize_api_url(url)
         http.proxy = ENV['http_proxy'] if ENV['http_proxy']
+        http.auth.basic(http_user, http_pass)  if http_user && http_pass
       end
     end
 

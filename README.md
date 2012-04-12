@@ -16,7 +16,7 @@ gem install mantisrb
 Create a session to the Mantis server:
 
 ```ruby
-session = Mantis:Session.new "http://mantisurl.com/mantis", "YourUsername", "YourPassword"
+session = Mantis:Session.new "http://mantisurl.com/mantis", "YourUsername", "YourPassword", "(optional) HTTP Username", "(optional) HTTP Password"
 ```
 
 Various components are described below:
