@@ -109,7 +109,7 @@ module Mantis
     # a meta-method that will just retrieve the actual ObjectRef for the type
     # and the known value for it.
     def object_ref_for_value(type, value)
-      meth = VALUE_TO_METHOD[type]
+      meth = VALUE_TO_METHOD[type.to_sym]
       if meth
         vals = self.send(meth)
         val = vals.select { |s| s.value? value.to_s }[0]
