@@ -192,7 +192,8 @@ module Mantis
     # @param [Hash] hash
     # @return [Hash]
     def delete_xsi_type(hash)
-      hash.delete_if { |k,v| k == :"@xsi:type" }
+      return hash.delete_if { |k,v| k == :"@xsi:type" } if hash.is_a?(Hash)
+      hash
     end
 
   end
