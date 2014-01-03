@@ -1,12 +1,12 @@
 rvm: 
-  - 1.9.2
   - 1.9.3
-  - jruby
-env:
-  - JRUBY_OPTS=--1.9
+  - 2.0.0
+  - ruby-head
+  - jruby-19mode
+  - jruby-head
 notifications:
   recipients:
-    - klauer@gmail.com
+    - john.faucett@testcloud.de
 branches:
   only:
     - master

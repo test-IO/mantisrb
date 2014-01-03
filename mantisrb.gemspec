@@ -17,11 +17,11 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+  s.license       = "MIT"
 
-  s.add_runtime_dependency "nokogiri"
+  s.add_runtime_dependency "nokogiri", "~> 1.6.0"
   s.add_runtime_dependency "bundler"
   s.add_runtime_dependency "builder", ">= 2.1.2"
   s.add_runtime_dependency "savon"
-  s.add_runtime_dependency "nokogiri"
   s.add_runtime_dependency "log4r"
 end

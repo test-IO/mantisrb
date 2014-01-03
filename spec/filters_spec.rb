@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+
 class FiltersTest < MiniTest::Unit::TestCase
 describe Mantis::Filters do
 
