@@ -1,7 +1,7 @@
 # Mantis module that is the base for all {::Configs}, {::Session}'s, and
 # {::Projects} and {::Filters}
 module Mantis
-
+  
   # A Session is how you will perform requests to Mantis through the SOAP API.
   # 
   # To create a session, simply pass in the URL to the Mantis server, username,
@@ -15,7 +15,7 @@ module Mantis
   # From here, you can use your session to get access to the other parts of the
   # Mantis API, such as Filters, Configs, Issues and Projects.
   class Session
-    
+    attr_reader :connection
     # By default, Mantis ships with MantisConnect at
     # "/api/soap/mantisconnect.php", with the WSDL endpoint being "?wsdl".
     SOAP_API = "/api/soap/mantisconnect.php?wsdl"
@@ -26,13 +26,17 @@ module Mantis
     # @param [String] user
     # @param [String] pass
     def initialize(url, user, pass, http_user=nil, http_pass=nil)
+      if !url.include?('/api/')
+        url += SOAP_API
+      end
       @url = url
       @user = user
       @pass = pass
-      @connection = Savon::Client.new do
-        wsdl.document = sanitize_api_url(url)
-        http.proxy = ENV['http_proxy'] if ENV['http_proxy']
-        http.auth.basic(http_user, http_pass)  if http_user && http_pass
+      options = {wsdl: url, pretty_print_xml: true}
+      # Hack due to the crapy ssl key of mantishub service
+      options.merge!(ssl_verify_mode: :none) if url.include?('mantishub.com')
+      @connection = Savon.client(options) do
+        convert_request_keys_to :none
       end
     end
 
@@ -43,9 +47,7 @@ module Mantis
     # wrapped into <key>value</key> so nesting is encouraged.
     # @return [Hash] Raw response back from Mantis converted from XML to Hash.
     def response(request, params={})
-      @connection.request request do
-        soap.body = add_credentials(params)
-      end
+      @connection.call request, :message=>add_credentials(params)
     end
 
     # Create a trimmed response from Mantis.  Mantis will generate alot of

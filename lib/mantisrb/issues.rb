@@ -138,11 +138,10 @@ module Mantis
     # @param [Mantis::XSD::IssueNoteData] note_data
     # @return [Integer] the issue_note_id that you created
     def add_note(issue_id, note_data)
-      note_data = Mantis::XSD::IssueNoteData.new(note_data) if note_data.class == Hash
-      @session.response_trimmmed :mc_issue_note_add, {
+      @session.response_trimmed :mc_issue_note_add, {
         :issue_id => issue_id,
-        :note => note.to_s,
-        :order! => [:issue_note_id, :note]
+        :note => note_data,
+        :order! => [:issue_id, :note]
       }
     end
 
