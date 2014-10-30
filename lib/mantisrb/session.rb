@@ -34,7 +34,7 @@ module Mantis
       @pass = pass
       options = {wsdl: url, pretty_print_xml: true}
       # Hack due to the crapy ssl key of mantishub service
-      options.merge!(ssl_verify_mode: :none) if url.include?('mantishub.com')
+      options.merge!(ssl_verify_mode: :none, ssl_version: :TLSv1) if url.include?('mantishub.com')
       @connection = Savon.client(options) do
         convert_request_keys_to :none
       end
