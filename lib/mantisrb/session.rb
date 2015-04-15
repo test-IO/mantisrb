@@ -32,7 +32,13 @@ module Mantis
       @url = url
       @user = user
       @pass = pass
-      options = {wsdl: url, pretty_print_xml: true}
+      #@http_user = http_user
+      #@http_pass = http_pass
+      options = {
+        wsdl: url, 
+        basic_auth: [ http_user, http_pass ],
+        pretty_print_xml: true
+      }
       # Hack due to the crapy ssl key of mantishub service
       options.merge!(ssl_verify_mode: :none, ssl_version: :TLSv1) if url.include?('mantishub.com')
       @connection = Savon.client(options) do
