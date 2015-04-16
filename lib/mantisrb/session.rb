@@ -32,8 +32,6 @@ module Mantis
       @url = url
       @user = user
       @pass = pass
-      #@http_user = http_user
-      #@http_pass = http_pass
       options = { wsdl: url, pretty_print_xml: true }
       options[:basic_auth] = [ http_user, http_pass ]   if http_user && http_pass
       # Hack due to the crapy ssl key of mantishub service
