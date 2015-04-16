@@ -15,7 +15,7 @@ end
 
 group :guard do
   gem "guard"
-  gem "rb-fchange", :platforms => [:mswin, :mri, :mingw]
+  gem "rb-fchange", :platforms => [:mri]
   gem "rb-notifu"
   gem "rb-fsevent"
   gem "guard-minitest"
