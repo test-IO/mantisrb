@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.license       = "MIT"
 
-  s.add_runtime_dependency "nokogiri", "~> 1.6.0"
+  s.add_runtime_dependency "nokogiri", ">= 1.6.0"
   s.add_runtime_dependency "bundler"
   s.add_runtime_dependency "builder", ">= 2.1.2"
   s.add_runtime_dependency "savon", "~> 2.0"
